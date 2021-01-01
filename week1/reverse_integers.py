@@ -1,4 +1,4 @@
-def inverse_nums(x):
+def reverse_nums(x):
     inverse_holder=""
     if x < 0:
         # convert to positive
@@ -20,8 +20,6 @@ def inverse_nums(x):
             return 0
 
 
-n = 0
-print(inverse_nums(n))
 
 
 
