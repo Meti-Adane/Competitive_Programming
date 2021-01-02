@@ -35,11 +35,14 @@ def summation_operation(a, b):
     difference_in_digits = len(first_number) - len(second_number)
     zeros_required = "0" * difference_in_digits
     second_number = zeros_required + second_number
-
     for i in range(len(first_number) - 1, -1, -1):
         result = int(first_number[i]) + int(second_number[i]) + carry
         carry = result // 10
-        sum = str(result) + sum
+        if i == 0:
+            sum = str(result) + sum
+        else:
+            sum = str(result % 10) + sum
+
     return sum
 
 def subtraction_operation(a, b):
@@ -67,7 +70,7 @@ def subtraction_operation(a, b):
         elif int(first_number[i]) >= int(second_number[i]):
             difference = str(int(first_number[i]) - int(second_number[i]) - borrow) + difference
             borrow = 0
-    return difference
+    return int(difference)
 
 def multiplication_operation(a, b):
     first_number = longest_digit(str(a), str(b))
@@ -122,18 +125,35 @@ def add(a, b):
         b = int(b) * -1
         result = int(summation_operation(a, b)) * -1
     elif sign_check(a, b) == -1:
-        if a < 0:
+        if a == 0:
+            return b
+        elif b == 0:
+            return a
+        elif a < 0:
             a = int(a) * -1
         elif b < 0:
             b = int(b) * -1
         result = (subtraction_operation(a, b))
     return result
 
+print("********Operation on big numbers*************")
+while True:
+    try:
+        print("Choose operation \n 1. Additon \n 2. Multiplication \n 3. Exit")
+        operation_num = int(input(":\t"))
+        if operation_num == 0:
+            print("Program Exited")
+            exit()
+            break
+        num1 = (int(input("Enter the first number: \t")))
+        num2 = (int(input("Enter the second number: \t")))
+        if operation_num == 1:
+            print("Sum: ", add(num1, num2))
+        elif operation_num == 2:
+            print("Product", multiply(num1, num2))
+        else:
+            print("Wrong input! please choose from numbers you see on the menu")
 
-n = 33
-m = 333
-print(add(n , m))
-print(323 + 333)
-# print(summation(1000000, 1000000))
-# print(10^1000000000 + 10^1000000000)
+    except ValueError:
+        print("Wrong input! only numbers are allowed!")
 
