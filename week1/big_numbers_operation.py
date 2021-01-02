@@ -42,7 +42,6 @@ def summation_operation(a, b):
             sum = str(result) + sum
         else:
             sum = str(result % 10) + sum
-
     return sum
 
 def subtraction_operation(a, b):
