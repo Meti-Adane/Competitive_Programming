@@ -10,8 +10,3 @@ def bubleSort(l1):
                 swap(l1, i, j)
     return l1
 
-
-
-l1= [0, 21, 26, 17, 81, 2]
-bubleSort(l1)
-print(l1)

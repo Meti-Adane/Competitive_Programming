@@ -45,10 +45,8 @@ def divisibleSumPairs(n, k, ar):
 
                 n = ar[i]
                 m  = ar[j]
-                print("here", n , m)
                 sum = n + m
                 if (sum % k ) == 0:
-                    print("***********")
                     no_of_pairs += 1
     print(no_of_pairs)
 nk = input().split()

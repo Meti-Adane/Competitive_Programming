@@ -1,16 +1,29 @@
- 
+#!/bin/python3
+
+import math
+import os
+import random
+import re
+import sys
+
+# Complete the bonAppetit function below.
 def bonAppetit(bill, k, b):
-    if 2<= len(bill) <= 10 **5 and 0 <= b<= sum(bill):
-        if 0 < k < len(bill):
-            anna_bill = 0
-            m = 0
-            for i in bill:
-                if 0<= bill[m] <= 10**4:
-                    if i != bill[k]:
-                        anna_bill += i
-                m +=1
-            anna_share = anna_bill / 2
-            if anna_share == b:
-                print("Bon Appetit")
-            elif b > anna_share:
-                print(int(b - anna_share))
+    sum = 0
+    for i in bill:
+        if i != bill[k]:
+            sum += i
+    if (sum//2) <= b:
+        print("Bon Appetit")
+    else:
+        print(b - (sum // 2))
+nk = input().rstrip().split()
+
+n = int(nk[0])
+
+k = int(nk[1])
+
+bill = list(map(int, input().rstrip().split()))
+
+b = int(input().strip())
+
+bonAppetit(bill, k, b)

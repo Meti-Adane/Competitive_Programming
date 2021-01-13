@@ -12,6 +12,3 @@ def counting_sort(l1):
 
     return sorted_list
 
-
-l1 = [3,0, 0, 1, 8, 3, 50, 16, 309, 4, 2, 22, 0, 67]
-print(counting_sort(l1))
