@@ -1,3 +1,5 @@
+# question url : https://leetcode.com/contest/weekly-contest-112/problems/minimum-increment-to-make-array-unique
+
 class Solution:
     def minIncrementForUnique(self, A: List[int]) -> int:
         nums = A
