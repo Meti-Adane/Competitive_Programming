@@ -11,6 +11,6 @@ class Solution:
         if row == len(triangle) - 1:
             return triangle[row][col]
 
-        memo[(row, col)] = min(self.traveseNew(triangle, ro w +1, col, memo), self.traveseNew(triangle, ro w +1, co l +1, memo)) + triangle[row][col]
+        memo[(row, col)] = min(self.traveseNew(triangle, row +1, col, memo), self.traveseNew(triangle, row +1, col +1, memo)) + triangle[row][col]
 
         return memo[(row ,col)]
