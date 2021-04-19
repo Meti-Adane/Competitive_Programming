@@ -1,9 +1,9 @@
-question url :
+# question url : https://leetcode.com/problems/subrectangle-queries/
 
 
 class SubrectangleQueries:
 
-    def __init__(self, rectangle: List[List[int]]):
+    def __init__(self, rectangle):
         self.list = rectangle
         self.visited = set()
 
