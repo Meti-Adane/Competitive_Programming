@@ -1,3 +1,18 @@
+# Method 1 sorting 
+class Solution:
+    def findUnsortedSubarray(self, nums: List[int]) -> int:
+        high, low = -1, -1 
+        arr = sorted(nums)
+        for i in range(len(nums)):
+            if nums[i] != arr[i] and low == -1:
+                low = i 
+            if nums[i] != arr[i] and low > -1:
+                high = i
+        return high - low + 1 if low > -1 else 0
+
+
+
+# Method 2 monotonic stacks
 class Solution:
     def findUnsortedSubarray(self, nums: List[int]) -> int:
         start, end = len(nums), float('-inf')    
