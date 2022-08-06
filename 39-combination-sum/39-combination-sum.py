@@ -4,13 +4,14 @@ class Solution:
             if runningSum == target:
                 combinations.append(stack.copy())
                 return combinations
-            if runningSum > target:
+            if runningSum > target or index >= len(nums):
                 return combinations
-            
-            for i in range(index, len(nums)):
-                stack.append(nums[i])
-                combinations = combine(i, runningSum+nums[i], stack, combinations)
-                stack.pop()
+
+
+            stack.append(nums[index])
+            combinations = combine(index, runningSum+nums[index], stack, combinations)
+            stack.pop()
+            combinations = combine(index+1, runningSum, stack, combinations)
             return combinations
 
         return combine(0, 0, [], [])
