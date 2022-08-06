@@ -10,15 +10,13 @@ class Solution:
         def dfs(node):
             if not node:
                 return 0
-            leftSum = dfs(node.left)
-            rightSum = dfs(node.right)
+            leftSum = max(dfs(node.left), 0)
+            rightSum = max(dfs(node.right), 0)
             
             path = max(node.val, leftSum + rightSum + node.val)
-            path = max(path, rightSum + node.val)
-            path = max(path, leftSum + node.val)
             
             self.ans = max(path, self.ans)
-            return max(max(leftSum, rightSum) + node.val, node.val)
+            return max(leftSum, rightSum) + node.val
         
         dfs(root)
         return self.ans
