@@ -6,25 +6,16 @@
 #         self.right = right
 class Solution:
     def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
-        indexMapper = dict()
         
-        for pos, val in enumerate(inorder):
-            indexMapper[val] = pos
-        
-        def construct(i, j, arr):
-            if not arr:
-                return 
+        def construct(inorder, postorder):
+            if not inorder or not postorder:
+                return None
             
-            nodeValue = arr.pop() #3
-            index = indexMapper[nodeValue] #1
+            index = inorder.index(postorder.pop())
+            node = TreeNode(inorder[index])
             
-            leftCount = index - i #1
-            rightCount = len(arr) - (j - index-1) #
-            
-            node = TreeNode(nodeValue)
-            node.left = construct(i, index, arr[:leftCount]) #
-            node.right = construct(index+1, j, arr[rightCount:]) #
-            
+            node.left = construct(inorder[:index], postorder[:index])
+            node.right = construct(inorder[index+1:], postorder[index:])
             return node
         
-        return construct(0, len(inorder), postorder)
+        return construct(inorder, postorder)
