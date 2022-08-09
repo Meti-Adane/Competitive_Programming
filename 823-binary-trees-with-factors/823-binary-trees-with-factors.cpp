@@ -1,6 +1,6 @@
 class Solution {
-    long long int ans = 0;
-    unordered_map<long int, long long int> dp;
+    long int ans = 0;
+    unordered_map<long int, long int> dp;
     int mod = pow(10, 9) + 7;
 public:
     int numFactoredBinaryTrees(vector<int>& arr) {
@@ -15,7 +15,7 @@ public:
         
     }
     
-    long long int recurse(int index, vector<int>& arr){
+    long int recurse(int index, vector<int>& arr){
             if (index >= arr.size()){
                 return 0;
             }
