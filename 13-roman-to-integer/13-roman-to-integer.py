@@ -11,25 +11,13 @@ class Solution:
         }
         
         integer = 0
-        
         i = 0 
         
-        
-        def isSpecialCase(i):
-            if i + 1 < len(s):
-                if ((s[i] == 'I' and (s[i+1] == 'V' or s[i+1] == 'X')) or 
-                    (s[i] == 'X' and (s[i+1] == 'L' or s[i+1] == 'C')) or 
-                    (s[i] == 'C'and (s[i+1] == 'D' or s[i+1] == 'M'))):
-                        return True
-            return False
-        
-        while i < len(s):
-            if isSpecialCase(i):
-                integer += (hashMap[s[i+1]] - hashMap[s[i]])
-                i += 2
+        for i in range(len(s)):
+            if i + 1 < len(s) and hashMap[s[i]] < hashMap[s[i+1]]:
+                integer -=  hashMap[s[i]]
             else:
                 integer += hashMap[s[i]]
-                i += 1
-                
+            
         return integer
                 
