@@ -14,14 +14,17 @@ class Solution:
         
         i = 0 
         
+        
+        def isSpecialCase(i):
+            if i + 1 < len(s):
+                if ((s[i] == 'I' and (s[i+1] == 'V' or s[i+1] == 'X')) or 
+                    (s[i] == 'X' and (s[i+1] == 'L' or s[i+1] == 'C')) or 
+                    (s[i] == 'C'and (s[i+1] == 'D' or s[i+1] == 'M'))):
+                        return True
+            return False
+        
         while i < len(s):
-            if s[i] == 'I' and (i + 1 < len(s)) and (s[i+1] == 'V' or s[i+1] == 'X'):
-                integer += (hashMap[s[i+1]] - hashMap[s[i]])
-                i += 2
-            elif  s[i] == 'X' and (i + 1 < len(s)) and (s[i+1] == 'L' or s[i+1] == 'C'):
-                integer += (hashMap[s[i+1]] - hashMap[s[i]])
-                i += 2
-            elif s[i] == 'C' and (i + 1 < len(s)) and (s[i+1] == 'D' or s[i+1] == 'M'):
+            if isSpecialCase(i):
                 integer += (hashMap[s[i+1]] - hashMap[s[i]])
                 i += 2
             else:
