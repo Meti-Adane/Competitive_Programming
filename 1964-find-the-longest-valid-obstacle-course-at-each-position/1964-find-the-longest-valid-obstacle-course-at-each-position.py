@@ -2,9 +2,9 @@
 class Solution:
     def longestObstacleCourseAtEachPosition(self, obstacles: List[int]) -> List[int]:
         
-        ans = [1]
+        ans = []
         dp = [float('inf')] * (len(obstacles)+1)
-        dp[0] = obstacles[0]
+        
         
         def binary_search_lower(low, high, target):
             index = 0
@@ -20,7 +20,7 @@ class Solution:
             return index
         
         
-        for i in range(1, len(obstacles)):
+        for i in range(len(obstacles)):
             index = binary_search_lower(0, len(dp)-1, obstacles[i])
             dp[index] = obstacles[i]
             ans.append(index+1)
