@@ -16,7 +16,7 @@ class Solution:
              
             if onescount:
                 ans += self.countsubstring(onescount, dp)
-                left = right 
+                left = right + 1
             else:
                 left += 1
                 
@@ -25,8 +25,6 @@ class Solution:
     def countsubstring(self, n, dp):
         if n in dp:
             return dp[n]
-        if n == 0:
-            return 0
         dp[n] = self.countsubstring(n-1, dp) + n   
         return dp[n]
 
