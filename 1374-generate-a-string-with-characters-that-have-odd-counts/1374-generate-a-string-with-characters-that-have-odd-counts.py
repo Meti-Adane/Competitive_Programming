@@ -1,8 +1,4 @@
 class Solution:
     def generateTheString(self, n: int) -> str:
-        if n %2 == 0:
-            ans = "a" * (n-1)
-            ans+= "b"
-        else:
-            ans = "a" * n
-        return ans
+        return ("a" * (n-1)) + "b" if (n%2) == 0 else "a" * n
+        
