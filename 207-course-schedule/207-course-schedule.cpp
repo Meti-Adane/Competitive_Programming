@@ -28,7 +28,7 @@ public:
         }
         
         for (int i=0; i < numCourses; ++i){
-            if (isCycle(i, taken, visited, graph)){
+            if (!taken[i] and  isCycle(i, taken, visited, graph)){
                 return false;
             }
         }
