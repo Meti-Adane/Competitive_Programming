@@ -1,15 +1,26 @@
 class Solution:
     def numsSameConsecDiff(self, n: int, k: int) -> List[int]:
         graph = defaultdict(list)
-        
+        digit = {
+            0:"0",
+            1:"1", 
+            2:"2", 
+            3:"3", 
+            4:"4",
+            5:"5", 
+            6:"6",
+            7:"7",
+            8:"8",
+            9:"9"
+        }
         for i in range(10):
             c1 = i + k 
             c2 = i - k 
             
             if c1 < 10:
-                graph[str(i)].append(str(c1))
+                graph[digit[i]].append(digit[c1])
             if c2 >= 0:
-                graph[str(i)].append(str(c2))
+                graph[digit[i]].append(digit[c2])
         
                 
         def dfs(arr, graph, ans, n):
@@ -25,6 +36,6 @@ class Solution:
         
         ans = set()
         for i in range(1, 10):
-            dfs([str(i)], graph, ans, n)
+            dfs([digit[i]], graph, ans, n)
         return ans  
                 
