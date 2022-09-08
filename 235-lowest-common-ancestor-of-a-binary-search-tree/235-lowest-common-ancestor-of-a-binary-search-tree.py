@@ -10,15 +10,13 @@ class Solution:
         
         
         
-        def finder(node):
-            if not node:
+        def lca(node, target1, target2):
+            if not node or node.val == target1.val or node.val == target2.val:
                 return node
-            
-            if p.val > node.val and q.val > node.val:
-                return finder(node.right)
-            if p.val < node.val and q.val < node.val:
-                return finder(node.left)
+            if node.val > target1.val and node.val > target2.val:
+                return lca(node.left, target1, target2)
+            if node.val < target1.val and node.val < target2.val:
+                return lca(node.right, target1, target2)
             return node
         
-        
-        return finder(root)
+        return lca(root, p, q)
