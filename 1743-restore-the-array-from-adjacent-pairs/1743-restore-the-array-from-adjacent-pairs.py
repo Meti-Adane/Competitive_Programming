@@ -10,8 +10,9 @@ class Solution:
             graph[v].append(u)
           
         for key, val in graph.items():
-            if start == -1 or len(val) < len(graph[start]):
+            if len(val) == 1:
                 start = key
+                break
         
         def builder(node, visited):
             nonlocal ans
