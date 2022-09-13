@@ -6,35 +6,28 @@
 #         self.right = right
 class Solution:
     def lcaDeepestLeaves(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        que = deque()
-        que.append(root)
         
+        heights = defaultdict(int)
         
-        while que:
-            node1, node2 = None, None
-            for _ in range(len(que)):
-                temp = que.popleft()
-                if not node1:
-                    node1 = temp
-                node2 = temp
-                if temp.left:
-                    que.append(temp.left)
-                if temp.right:
-                    que.append(temp.right)
+        def getdepth(node, h):
+            if not node:
+                return 0
+            heights[node] = max(getdepth(node.left, h+1), getdepth(node.right, h+1)) + 1
+            return heights[node] 
+        
                 
-        def lca(node, target1, target2):
-            if not node or node.val == target1.val or node.val == target2.val:
-                return node
-            left = lca(node.left, target1, target2)
-            right = lca(node.right, target1, target2)
+        def lca(node):
+            left = heights[node.left]
+            right = heights[node.right]
             
-            if left and right:
+            if left == right:
                 return node
-            if left and not right:
-                return left
-            return right
+            if left > right:
+                return lca(node.left)
+            return lca(node.right)
         
-        return lca(root, node1, node2)
+        getdepth(root, 0)
+        return lca(root)
             
             
             
