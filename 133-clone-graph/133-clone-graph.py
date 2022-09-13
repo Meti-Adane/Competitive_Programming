@@ -22,7 +22,7 @@ class Solution:
             
             for c in n.neighbors:
                 children.append(dfs(c))
-            nodecopy.neighbors = children.copy()
+            nodecopy.neighbors = children
             return nodecopy
             
         if not node:
