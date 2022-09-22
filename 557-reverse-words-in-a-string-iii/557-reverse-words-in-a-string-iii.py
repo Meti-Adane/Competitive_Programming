@@ -1,23 +1,20 @@
 class Solution:
     def reverseWords(self, s: str) -> str:
-        ans = []
-        words = s.split()
+        length = []
+        chars = list(s)
+        j = 0
         
-        def reverseWord(word, ans):
-            l, r = 0, len(word)-1
-            container = list(word)
-            while l < r:
-                container[l], container[r] = container[r], container[l]
-                l += 1
-                r -= 1
-            ans.extend(container)
+        while j < len(s):
+            i = j
+            while i < len(s) and s[i] != " ":
+                i += 1
+            length.append((j, i))
+            j = i +1
             
-            
-        for word in words:
-            reverseWord(word, ans)
-            ans.append(" ")
-        ans.pop()
-        return "".join(ans)
-  
-        
-        
+        for start, end in length:
+            end -= 1
+            while start < end:
+                chars[start], chars[end] = chars[end], chars[start]
+                start += 1
+                end -= 1
+        return "".join(chars)
