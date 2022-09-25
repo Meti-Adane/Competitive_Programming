@@ -22,20 +22,15 @@
 
 class NestedIterator:
     def __init__(self, nestedList: [NestedInteger]):
-        self.que = []
-        self.front = 0
+        self.que = deque()
         self.deconstructList(nestedList, self.que)
     
     def next(self) -> int:
-        ans= self.que[self.front]
-        self.front += 1
-        return ans
+        return self.que.popleft()
     
     def hasNext(self) -> bool:
-        if self.front >= len(self.que):
-            return False
-        return True
-    
+        return len(self.que) > 0
+
     def deconstructList(self, arr, output):
         for val in arr:
             if not val.isInteger():
