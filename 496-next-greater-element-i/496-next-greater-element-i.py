@@ -6,8 +6,7 @@ class Solution:
         
         for i, num in enumerate(nums2):
             while stack and num > stack[-1]:
-                
-                if stack[-1] in hashmap and ans[hashmap[stack[-1]]] == -1:
+                if stack[-1] in hashmap:
                     ans[hashmap[stack[-1]]] = num
                 stack.pop()
             stack.append(num)
