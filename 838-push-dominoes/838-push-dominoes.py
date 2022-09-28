@@ -1,8 +1,9 @@
 class Solution:
     def pushDominoes(self, dominoes: str) -> str:
         distances = []
+        n = len(dominoes)
         prevF, dst = 'L', 0
-        ans = [None for _ in range(len(dominoes))]
+        ans = list(dominoes)
         
         #count the distance of each '.' from the right force
         for i, char in enumerate(dominoes):
@@ -15,18 +16,17 @@ class Solution:
             elif prevF == 'R':
                 distances.append(i-dst)
             else:
-                distances.append(float('inf'))
+                distances.append(n)
         
         prevF, dst = 'R', 0   
-        j = len(dominoes)-1
+        j = n-1
         
         #form ans by comapring dst from left force and right force
         while j >= 0 :
             char = dominoes[j]
-            leftForcedst = float('inf') 
+            leftForcedst = n 
             if char != '.':
                 prevF, dst = char, j
-                ans[j] = char
             else:
                 if prevF == 'L':
                     leftForcedst = dst - j
