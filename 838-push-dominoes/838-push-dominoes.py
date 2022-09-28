@@ -1,11 +1,43 @@
 class Solution:
     def pushDominoes(self, dominoes: str) -> str:
-        temp = ''
+        distances = []
+        prevF, dst = 'L', 0
+        ans = [None for _ in range(len(dominoes))]
         
-        while dominoes != temp:
-            temp = dominoes
-            dominoes = dominoes.replace('R.L', 'xxx')       # <-- 1)
-            dominoes = dominoes.replace('R.', 'RR')         # <-- 2)
-            dominoes = dominoes.replace('.L', 'LL')         # <-- 2)
-
-        return  dominoes.replace('xxx', 'R.L')              # <-- 3)
+        #count the distance of each '.' from the right force
+        for i, char in enumerate(dominoes):
+            if char != '.':
+                prevF, dst = char, i
+                if char == 'R':
+                    distances.append(1)
+                else:
+                    distances.append(0)
+            elif prevF == 'R':
+                distances.append(i-dst)
+            else:
+                distances.append(float('inf'))
+        
+        prevF, dst = 'R', 0   
+        j = len(dominoes)-1
+        
+        #form ans by comapring dst from left force and right force
+        while j >= 0 :
+            char = dominoes[j]
+            leftForcedst = float('inf') 
+            if char != '.':
+                prevF, dst = char, j
+                ans[j] = char
+            else:
+                if prevF == 'L':
+                    leftForcedst = dst - j
+                ans[j] = self.calculateForce(distances, leftForcedst, j)
+            j -= 1
+        return "".join(ans)
+               
+    def calculateForce(self, distances, leftForcedst, idx):
+            if leftForcedst == distances[idx]:
+                return '.'
+            if leftForcedst < distances[idx]:
+                return 'L'
+            return 'R'
+            
