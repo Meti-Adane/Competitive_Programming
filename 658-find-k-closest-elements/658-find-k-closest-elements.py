@@ -1,9 +1,5 @@
 class Solution:
     def findClosestElements(self, arr: List[int], k: int, x: int) -> List[int]:
-        if x < arr[0]:
-            idx = -1
-        if x > arr[-1]:
-            idx = len(arr)
         ans = [] 
         heap = []
         for i, num in enumerate((arr)):
