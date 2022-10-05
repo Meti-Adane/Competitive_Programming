@@ -16,11 +16,7 @@ class Solution:
             for _ in range(len(que)):
                 node, height = que.popleft()
                 if height == depth-1:
-                    prevleft, prevright = node.left, node.right
-                    newleftnode = TreeNode(val, prevleft, None)
-                    newrightnode = TreeNode(val, None, prevright)
-                    node.left = newleftnode
-                    node.right = newrightnode
+                    self.insertnewnode(node, val)
                     isFound = True 
                 if not isFound and node.left:
                     que.append((node.left, height+1))
@@ -29,3 +25,10 @@ class Solution:
             if isFound:
                 break
         return root 
+    
+    def insertnewnode(self, oldnode, val):
+        prevleft, prevright = oldnode.left, oldnode.right
+        newleftnode = TreeNode(val, prevleft, None)
+        newrightnode = TreeNode(val, None, prevright)
+        oldnode.left = newleftnode
+        oldnode.right = newrightnode
