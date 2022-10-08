@@ -14,5 +14,7 @@ class Solution:
                 elif res < target:
                     left += 1
                 else:
-                    break
+                    return target
         return ans
+    
+       
