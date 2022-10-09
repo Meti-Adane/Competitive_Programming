@@ -5,6 +5,8 @@ class Solution:
         """
         directions = [(0, 1), (1, 0), (-1, 0), (0, -1)]
         n, m = len(board), len(board[0])
+        visited = set()
+        
         def isValid(row, col, visited, initial):
             if ( row < 0 or row >= n or 
                  col < 0 or col >= m or 
@@ -14,25 +16,20 @@ class Solution:
                 return False
             return True
         
-        def updateBoard(row, col, visited, status, initial):
+        def caputureUnsurounded(row, col, visited, initial):
             if not isValid(row, col, visited, initial):
                 return 
             visited.add((row, col))
-            board[row][col] = status
             for x, y in directions:
-                updateBoard(row+x, col+y, visited, status, initial)
+                caputureUnsurounded(row+x, col+y, visited, initial)
         
         
         for row in range(n):
             for col in range(m):
                 if (row == 0 or row >= n-1 or col == 0 or col >= m-1): 
-                    updateBoard(row, col, set(), 'P', 'O')
-        
-        for row in range(1, n-1):
-            for col in range(1, m-1):
-                updateBoard(row, col, set(), 'X', 'O')
-                    
-        for row in range(n): #reverse to treat false postives
+                    caputureUnsurounded(row, col, visited,'O')
+
+        for row in range(n): #update every cell with 0 to x if not in unsurounded region
             for col in range(m):
-                if (row == 0 or row >= n-1 or col == 0 or col >= m-1): 
-                    updateBoard(row, col, set(), 'O', 'P')
+                if (row, col) not in visited and board[row][col] == 'O':
+                    board[row][col]  = 'X'
