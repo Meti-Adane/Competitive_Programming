@@ -8,13 +8,8 @@ class Solution:
         visited = set()
         
         def isValid(row, col, visited, initial):
-            if ( row < 0 or row >= n or 
-                 col < 0 or col >= m or 
-                 (row, col) in visited or 
-                 board[row][col] != initial
-                ):
-                return False
-            return True
+            return  not (row < 0 or row >= n or col < 0 or col >= m or 
+                         (row, col) in visited or board[row][col] != initial)
         
         def caputureUnsurounded(row, col, visited, initial):
             if not isValid(row, col, visited, initial):
