@@ -14,7 +14,6 @@ class Solution:
             
             if abs(leftSubTree - rightSubTree) > 1:
                 return float('inf')
-            else:
-                return max(leftSubTree, rightSubTree) + 1
+            return max(leftSubTree, rightSubTree) + 1
         return dfs(root) < float('inf')
             
