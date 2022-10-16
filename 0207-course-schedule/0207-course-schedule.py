@@ -1,27 +1,22 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        graph = dict()
-        takenCourses = set()
+        courses, prereqs = defaultdict(set), defaultdict(list)
+        que = deque()
+        takencourses = 0
         for course, prereq in prerequisites:
-            if course not in graph:
-                graph[course]= []
-            graph[course].append(prereq)
+            courses[course].add(prereq)
+            prereqs[prereq].append(course)
+        
+        for i in range(numCourses):
+            if not len(courses[i]):
+                que.append(i)
         
         
-        def hasCycle(node, visited):
-            if node in visited:
-                return True
-            if node not in graph or node in takenCourses:
-                return False
-            visited.add(node)
-            for prereq in graph[node]:
-                if hasCycle(prereq, visited):
-                    return True
-            takenCourses.add(node)
-            visited.remove(node)
-            return False
-                
-        for course in graph:
-            if hasCycle(course, set()):
-                return False
-        return True
+        while que:
+            course = que.popleft()
+            takencourses += 1
+            for dependant in prereqs[course]:
+                courses[dependant].remove(course)
+                if not len(courses[dependant]):
+                    que.append(dependant)
+        return takencourses == numCourses
