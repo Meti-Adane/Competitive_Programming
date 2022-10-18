@@ -20,5 +20,6 @@ class Solution:
         ans = 0       
         for i in range(n):
             for j in range(m):
-                ans = max(ans, dfs(i, j, set()))
+                if (i, j) not in memo:
+                    ans = max(ans, dfs(i, j, set()))
         return ans
