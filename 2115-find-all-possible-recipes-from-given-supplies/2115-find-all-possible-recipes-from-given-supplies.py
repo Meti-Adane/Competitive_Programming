@@ -2,28 +2,27 @@
 class Solution:
     def findAllRecipes(self, recipes: List[str], ingredients: List[List[str]], supplies: List[str]) -> List[str]:
         supplies = set(supplies)
-        graph = dict()
-        recipeIngrident = defaultdict(set)
+        graph = defaultdict(set)
         ans = []
         for i, recipe in enumerate(recipes):
-            graph[recipe] = ingredients[i]
-            recipeIngrident[recipe] = set(ingredients[i])
-
+            graph[recipe] = set(ingredients[i])
+      
         def dfs(recipe, visited, supplies):
             nonlocal ans
-            
-            if recipe in supplies: #{yeast, flour, meat , bread}
+            if recipe in supplies: 
                 return True
-            if recipe in visited or recipe not in graph: #{sandwich, }
+            if recipe in visited or recipe not in graph: 
                 return False
-            visited.add(recipe)
             
+            visited.add(recipe)
+            used = set()
             for ing in graph[recipe]:
                 if not dfs(ing, visited, supplies):
                     return False
-                recipeIngrident[recipe].discard(ing)
+                used.add(ing)
+            graph[recipe] ^= used
             
-            if len(recipeIngrident[recipe]) == 0:
+            if not graph[recipe]:
                 supplies.add(recipe)
                 ans.append(recipe)
             visited.remove(recipe)
