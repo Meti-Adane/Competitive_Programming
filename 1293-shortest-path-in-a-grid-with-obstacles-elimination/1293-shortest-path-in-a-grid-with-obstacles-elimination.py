@@ -4,7 +4,7 @@ class Solution:
         visited = set() 
         n, m = len(grid), len(grid[0])
         isvalid = lambda x, y, v, k: 0 <= x < n and 0 <= y < m and (x,y, k) not in v 
-        dirs = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        dirs = [(0, 1), (1, 0), (-1, 0), (0, -1)]
         
         while que:
             step, row, col, k = que.popleft()
