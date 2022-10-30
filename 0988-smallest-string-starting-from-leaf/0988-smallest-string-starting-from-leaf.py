@@ -6,18 +6,20 @@
 #         self.right = right
 class Solution:
     def smallestFromLeaf(self, root: Optional[TreeNode]) -> str:
-        words = []
+        ans = None
         
         def dfs(node, stack):
-            nonlocal words
+            nonlocal ans
             if not node:
                 return 
             stack.append(chr(node.val+97))
             if not node.left and not node.right:
-                words.append("".join(stack[::-1]))
+                word = "".join(stack[::-1])
+                ans = word if not ans else min(ans, word) 
+                
             dfs(node.left, stack)
             dfs(node.right, stack)
             stack.pop()
         dfs(root, [])
         
-        return sorted(words)[0]
+        return ans
