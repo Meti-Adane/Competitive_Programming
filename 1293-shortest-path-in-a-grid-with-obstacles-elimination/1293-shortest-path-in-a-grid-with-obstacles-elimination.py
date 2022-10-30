@@ -3,8 +3,10 @@ class Solution:
         que = deque([(0, 0, 0, k)]) 
         visited = set() 
         n, m = len(grid), len(grid[0])
+        
         if k >= n + m - 2:
             return n + m - 2
+        
         isvalid = lambda x, y, v, k: 0 <= x < n and 0 <= y < m and (x,y, k) not in v 
         dirs = [(0, 1), (1, 0), (-1, 0), (0, -1)]
         
