@@ -12,10 +12,9 @@ class Solution:
             nonlocal words
             if not node:
                 return 
-            if not node.left and not node.right:
-                words.append("".join([chr(node.val+97)]+stack[::-1]))
-                return 
             stack.append(chr(node.val+97))
+            if not node.left and not node.right:
+                words.append("".join(stack[::-1]))
             dfs(node.left, stack)
             dfs(node.right, stack)
             stack.pop()
