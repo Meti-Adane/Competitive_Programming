@@ -10,10 +10,11 @@ class Solution:
                 return col
             
             newcol = col + grid[row][col]
+            visited[(row, col)] = -1
+            
             if canPass(row, col, newcol):
                 visited[(row, col)] = outCol(row+1, newcol, visited)
-            else:
-                visited[(row, col)] = -1
+                
             return visited[(row, col)]
         
         dp = dict()
