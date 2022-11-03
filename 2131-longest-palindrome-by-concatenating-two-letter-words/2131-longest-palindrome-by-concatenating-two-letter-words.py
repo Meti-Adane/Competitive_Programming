@@ -8,21 +8,18 @@ class Solution:
                 palindromes.append(word)
             seen[word] = seen.get(word, 0) + 1
             
-        pivot = 2 if hasPivotPalindrome(palindromes, seen) else 0
+        count += 2 if hasPivotPalindrome(palindromes, seen) else 0
 
         for word, freq in seen.items():
             reverse = word[::-1]
             x = y = 0
             if reverse == word:
-                y = 2
-                x = seen[word] if seen[word] % 2 == 0 else seen[word] - 1
-                
+                y, x = 2, seen[word] if seen[word] % 2 == 0 else seen[word] - 1
             elif reverse in seen:
-                x = min(seen[word], seen[reverse])
-                y = 4
+                y, x =4, min(seen[word], seen[reverse])
                 seen[reverse] = 0 
             
             count += (x*y)
             seen[word] = 0
            
-        return count + pivot 
+        return count  
