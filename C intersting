@@ -1,0 +1,35 @@
+from bisect import bisect as bis
+l = int(input())
+arr = sorted(list(map(int,input().split())))
+for x_x in range(int(input())):
+    n  =  int(input())
+    print(bis(arr,n))
+
+
+
+def getHome(s, target, jump):
+    n = nearestLilly = target-1
+    dp = [-1] * target
+    if s[n] == '0':  return -1
+    dp[n] = 0
+    for i in range(target-1, -1, -1):
+        if s[i] == '0': continue 
+    
+        for k in range(jump, -1, -1):
+            if k+i <= n and i != 0 and s[k+i] == '1':
+                print(i, k+i, dp[k+i])
+                dp[i] = dp[k+i] + 1
+                break
+        print(dp)
+                    
+    return dp[0]
+    
+
+            
+            
+
+
+    
+target, jump = map(int, input().split())
+s = input()
+print(getHome(s, target, jump))
