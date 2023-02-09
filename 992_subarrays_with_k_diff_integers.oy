@@ -1,0 +1,21 @@
+class Solution:
+    def subarraysWithKDistinct(self, nums: List[int], k: int) -> int:
+        
+        
+        def atMost(k):
+            count = 0 
+            lookup = dict()
+            left = 0 
+
+            for right in range(len(nums)):
+                lookup[nums[right]] = lookup.get(nums[right], 0) +1 
+                
+                while left <= right and len(lookup) > k:
+                    lookup[nums[left]] -= 1
+                    if lookup[nums[left]] == 0:
+                        lookup.pop(nums[left])
+                    left += 1
+                count += (right - left +1)
+            return count
+
+        return atMost(k) - atMost(k-1)
