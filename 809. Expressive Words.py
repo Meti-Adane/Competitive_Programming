@@ -1,7 +1,7 @@
 class Solution:
     def expressiveWords(self, s: str, words: List[str]) -> int:
         
-        def streches(s, word) :
+        def helper(s, word) :
             i = j = 0
             while i < len(s) and j < len(word) and s[i] == word[j]:
                 count_s = count_word = 1
@@ -14,4 +14,4 @@ class Solution:
                     return False				
             return i == len(s) and j == len(word)
         
-        return sum(streches(s, word) for word in words)
+        return sum(helper(s, word) for word in words)
