@@ -1,7 +1,8 @@
 class Solution:
     def expressiveWords(self, s: str, words: List[str]) -> int:
         
-        def helper(s, word) :
+        ans = 0 
+        def helper(word) :
             i = j = 0
             while i < len(s) and j < len(word) and s[i] == word[j]:
                 count_s = count_word = 1
@@ -11,7 +12,9 @@ class Solution:
                         count_word +=1
                 i, j = i+count_s, j+count_word
                 if count_word < count_s < 3 or count_word > count_s: 
-                    return False				
-            return i == len(s) and j == len(word)
+                    return 0				
+            return 1 if i == len(s) and j == len(word) else 0
         
-        return sum(helper(s, word) for word in words)
+        for word in words:
+             ans += helper(word)
+        return ans
