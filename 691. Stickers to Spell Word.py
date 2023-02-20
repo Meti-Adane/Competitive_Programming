@@ -1,20 +1,20 @@
 class Solution:
-    def minStickers(self, stickers: List[str], target: str) -> int:
-        n = len(target)
-        dp = [-1] * pow(2, n)
-        dp[0] = 0
-        for state in range(pow(2, n)):
-            if dp[state] == -1:
-                continue
-            for sticker in stickers:
-                new_state = state
-                for letter in sticker:
-                    for i in range(n):
-                        if (new_state >> i) & 1:
-                            continue
-                        if target[i] == letter:
-                            new_state |= 1 << i
-                            break
-                if dp[new_state] == -1 or dp[new_state] > dp[state] + 1:
-                    dp[new_state] = dp[state] + 1
-        return dp[-1]
+    def expressiveWords(self, s: str, words: List[str]) -> int:
+        
+        ans = 0 
+        def helper(word) :
+            i = j = 0
+            while i < len(s) and j < len(word) and s[i] == word[j]:
+                count_s = count_word = 1
+                while i + count_s < len(s) and s[i] == s[i+count_s]:
+                        count_s+=1
+                while j + count_word < len(word) and word[j] == word[j+count_word]:
+                        count_word +=1
+                i, j = i+count_s, j+count_word
+                if count_word < count_s < 3 or count_word > count_s: 
+                    return 0				
+            return 1 if i == len(s) and j == len(word) else 0
+        
+        for word in words:
+             ans += helper(word)
+        return ans
