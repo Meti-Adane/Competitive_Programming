@@ -1,21 +1,18 @@
 class Solution:
-    def largestOverlap(self, A: List[List[int]], B: List[List[int]]) -> int:
-        a_1 = []
-        b_1 = []
-        for i in range(len(A)):
-            for j in range(len(A[0])):
-                if A[i][j] == 1:
-                    a_1.append((i,j))
-                if B[i][j] == 1:
-                    b_1.append((i,j))
-        d = {}
+    def largestOverlap(self, img1: List[List[int]], img2: List[List[int]]) -> int:
+        img1Arr = []
+        img2Arr = []
+        for i in range(len(img1)):
+            for j in range(len(img1[0])):
+                if img1[i][j] == 1:
+                    img1Arr.append((i,j))
+                if img2[i][j] == 1:
+                    img2Arr.append((i,j))
+        container = {}
         ans = 0
-        for a_x, a_y in a_1:
-            for b_x,b_y in  b_1:
-                tr = (b_x - a_x, b_y - a_y)
-                if tr in d:
-                    d[tr] += 1
-                else:
-                    d[tr] = 1
-                ans = max(ans, d[tr])
+        for a_x, a_y in img1Arr:
+            for b_x,b_y in  img2Arr:
+                point = (b_x - a_x, b_y - a_y)
+                container[point] = container.get(point, 0) + 1
+                ans = max(ans, container[point])
         return ans

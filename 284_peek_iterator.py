@@ -41,8 +41,8 @@ class PeekingIterator:
         """
         :rtype: int
         """
-        value = self.current
-        self.current = self.iterator.next() if self.iterator.hasNext() else None       
+        val = self.current
+        self.curr = self.iterator.next() if self.iterator.hasNext() else None       
         return value
 
     def hasNext(self):
