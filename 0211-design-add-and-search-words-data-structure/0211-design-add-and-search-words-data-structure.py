@@ -36,36 +36,28 @@ class TrieNode:
 class WordDictionary:
 
     def __init__(self):
-        self.root = TrieNode()
+        self.root = dict()
 
     def addWord(self, word: str) -> None:
-        temp = self.root
-        for char in word:
-            if char not in temp.children:
-                temp.children[char] = TrieNode(char)
-            temp = temp.children[char]
-        temp.isEnd = True
-    def recurse(self, curr, word, node):
-
-        if curr == '.':
-            for i in range(ord('a'), ord('z') +1):
-                char = chr(i)
-                if char in node.children and self.recurse(char, word, node):
-                    return True 
-            return False 
-        
-        else:
-            if curr not in node.children:
-                return False
-            # If there are more charachters to match continue the check 
-            # If this is the last character check if the node is indicates end 
-            return ((word and self.recurse(word[0], word[1:], node.children[curr])) or 
-                         (not word and node.children[curr].isEnd))
+        if len(word) not in self.root:
+            self.root[len(word)] = set()
+        self.root[len(word)].add(word)
       
-                
    
     def search(self, word: str) -> bool:
-        return self.recurse(word[0], word[1:], self.root)
+        n = len(word)
+        if n not in self.root:
+            return False 
+        
+        if '.' in word:
+            for w in self.root[n]:
+                res = True
+                for i in range(n):
+                    if word[i] != '.' and word[i] != w[i]: 
+                        res = False 
+                        break
+                if res: return True 
+        return word in self.root[n]
         
         
         
