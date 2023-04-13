@@ -1,0 +1,20 @@
+class Solution:
+    def maximalNetworkRank(self, n: int, roads: List[List[int]]) -> int:
+        rank = [0] * n
+        connectedroads = set()
+        maxrank = 0
+        
+        for a, b in roads:
+            rank[a] += 1
+            rank[b] += 1
+            connectedroads.add((a, b))
+        
+        
+        for city1 in range(n):
+            for city2 in range(city1+1, n):
+                res = rank[city1]+rank[city2]
+                if (city1, city2) in connectedroads or (city2, city1) in connectedroads:
+                    res -= 1
+                maxrank = max(res, maxrank)
+        
+        return maxrank 
