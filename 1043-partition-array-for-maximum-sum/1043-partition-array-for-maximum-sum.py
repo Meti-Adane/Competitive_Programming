@@ -3,11 +3,10 @@ class Solution:
        
         N = len(arr)
         
-        # dp = dict()
-        @cache
+        dp = dict()
         def recurse(index):
             if index >= N: return 0 
-            # if index in dp: return dp[index]
+            if index in dp: return dp[index]
             maxCandidate = arr[index]
             maxSum = maxCandidate
 
@@ -15,7 +14,7 @@ class Solution:
                 maxCandidate = max(maxCandidate, arr[i])
                 subarraySum = (maxCandidate * (i-index+1) ) + recurse(i+1)
                 maxSum = max(maxSum, subarraySum)
-            # dp[index] = maxSum
+            dp[index] = maxSum
             return maxSum
 
 
