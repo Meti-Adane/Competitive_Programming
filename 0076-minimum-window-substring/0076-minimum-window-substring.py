@@ -1,45 +1,20 @@
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        
-        if len(t) > len(s):
-            return ''
-        
-        counter = Counter(t)
-        required = len(counter)
-        accumulated = 0 
-        hashmap = dict()
-        start, end = 0, len(s)+1
-        left, right = 0 , 0
-        
-        while right < len(s):
-            char = s[right]
-            if char in counter:
-                hashmap[char] = hashmap.get(char, 0) + 1
-                if hashmap[char] == counter[char]:
-                    accumulated += 1
-            
-            while left <= right and accumulated >= required:
-                if right-left < end-start:
-                    start, end = left, right
-                leftchar = s[left]
-                
-                if leftchar in hashmap: 
-                    hashmap[leftchar] -= 1
-                    if hashmap[leftchar] < counter[leftchar]:
-                        accumulated -= 1
-                left += 1
-                
-            right += 1
-        return s[start:end+1] if end < len(s)+1 else ''
-                
-                    
-                
-                
-            
-            
-       
+        lookup = Counter(t)
+        N, count = len(s), len(lookup)
+        start = 0
+        ans, minLength = s, N+1
 
+        for i, char in enumerate(s):
+            if char in lookup:
+                lookup[char] -= 1
+                if lookup[char] == 0: count -= 1
 
-        
-        
-        
+            while start < i and (s[start] not in lookup or lookup[s[start]] < 0):
+                if s[start] in lookup: lookup[s[start]] += 1
+                start += 1
+
+            if count == 0 and (i-start+1) < minLength:
+                ans, minLength = s[start:i+1], (i-start+1)
+
+        return ans if count == 0 else ""
