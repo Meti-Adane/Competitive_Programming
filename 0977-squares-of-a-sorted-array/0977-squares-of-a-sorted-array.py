@@ -4,13 +4,10 @@ class Solution:
         ans = deque()
         while left <= right:
             x, y = pow(nums[right], 2), pow(nums[left], 2)
-            if left == right:
-                ans.appendleft(x)
-                break
             if x >= y:
                 ans.appendleft(x)
                 right -= 1
-            if y >= x:
+            else:
                 ans.appendleft(y)
                 left += 1
         return ans
