@@ -6,13 +6,11 @@
 #         self.next = next
 class Solution:
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
-        def recurse(node):
-            if not node: 
-                return 0
-            idx = recurse(node.next) + 1
-            if idx > n:
-                node.next.val = node.val
-                
-            return idx
-        recurse(head)
-        return head.next
+        def remove(head):
+            if not head:
+                return 0, head
+            i, head.next = remove(head.next)
+            if i + 1 == n: return i+1, head.next
+            return i+1, head
+        
+        return remove(head)[1]
